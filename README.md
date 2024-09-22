@@ -5,6 +5,9 @@ A TypeScript SDK for the Threads API, making it easy to interact with Threads in
 [![npm version](https://badge.fury.io/js/threads-ts.svg)](https://badge.fury.io/js/threads-ts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## Official Threads Documentation:
+https://developers.facebook.com/docs/threads
+
 ## Table of Contents
 
 - [Installation](#installation)
