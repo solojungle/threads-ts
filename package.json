@@ -24,7 +24,10 @@
     "test": "npm run mocha 'test/**/*.test.ts'",
     "prepublish": "npm run build"
   },
-  "repository": "github:solojungle/threads-ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solojungle/threads-ts.git"
+  },
   "homepage": "https://github.com/solojungle/threads-ts#readme",
   "author": "Ali Awari (https://x.com/aliawarii)",
   "license": "Apache-2.0",
