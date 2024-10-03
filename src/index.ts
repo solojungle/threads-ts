@@ -38,11 +38,12 @@ type Scope =
   | "threads_manage_replies"
   | "threads_read_replies";
 
-interface ContainerStatus {
-  status: "EXPIRED" | "ERROR" | "FINISHED" | "IN_PROGRESS" | "PUBLISHED";
-  id: string;
-  error_message?: string;
-}
+type ContainerStatus =
+  | "EXPIRED"
+  | "ERROR"
+  | "FINISHED"
+  | "IN_PROGRESS"
+  | "PUBLISHED";
 
 type TimePeriod = "day" | "week" | "days_28" | "lifetime";
 
@@ -111,6 +112,12 @@ interface UserMetric {
   title: string;
   description: string;
   id: string;
+}
+
+interface ContainerStatusResponse {
+  status: ContainerStatus;
+  id: string;
+  error_message?: string;
 }
 
 // Main response structure for Media Insights
@@ -361,16 +368,18 @@ export class ThreadsAPI {
    * @returns The status of the media container
    * @note Recommended querying a container's status once per minute, for no more than 5 minutes.
    */
-  async getMediaContainerStatus(containerId: string): Promise<ContainerStatus> {
+  async getMediaContainerStatus(
+    containerId: string,
+  ): Promise<ContainerStatusResponse> {
     const url = `${this.baseUrl}${containerId}`;
     const params = new URLSearchParams({
       fields: "status,error_message",
     });
 
     try {
-      const response = await this.makeRequest<ContainerStatus>({
+      const response = await this.makeRequest<ContainerStatusResponse>({
         url,
-        method: "POST",
+        method: "GET",
         params,
       });
 
