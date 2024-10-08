@@ -133,7 +133,7 @@ interface ThreadsUserInsightsResponse {
 // Parameters for the User Insights API request
 interface ThreadsUserInsightsParams {
   metric: MetricName | MetricName[];
-  options: {
+  options?: {
     since?: number; // Unix timestamp
     until?: number; // Unix timestamp
   };
@@ -317,7 +317,7 @@ export class ThreadsAPI {
       media_type: mediaType,
       ...(mediaType === "IMAGE" && mediaUrl && { image_url: mediaUrl }),
       ...(mediaType === "VIDEO" && mediaUrl && { video_url: mediaUrl }),
-      ...(mediaType === "TEXT" && text && { text }),
+      ...(text && { text }),
     };
 
     try {
