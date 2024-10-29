@@ -68,11 +68,19 @@ Exchange the authorization code for an access token:
 
 ```typescript
 const code = 'AUTHORIZATION_CODE';
-const tokenResponse = await threadsAPI.getAccessToken(code);
-console.log('Access Token:', tokenResponse.access_token);
 
-// Set the access token for future requests
-threadsAPI.setAccessToken(tokenResponse.access_token);
+// Get the short lived token
+const { access_token: shortLivedToken } = await threads.getAccessToken(code);
+// Convert the short lived token to a long term access token
+const { access_token: accessToken, expires_in: expiresIn } = await threads.getLongLivedToken(shortLivedToken);
+
+// Store the access token in your db
+
+// Now we can do stuff like get the User profile
+const profile = await threads.getUserProfile({
+	userId: "me",
+	fields: ["id", "username", "name", "threads_profile_picture_url"],
+});
 ```
 
 ### Creating and Publishing a Thread
