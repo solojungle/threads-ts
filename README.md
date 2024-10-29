@@ -35,16 +35,24 @@ yarn add threads-ts
 First, import and initialize the ThreadsAPI class:
 
 ```typescript
-import { ThreadsAPI, ThreadsAPIConfig } from 'threads-ts';
+import { ThreadsAPI, ThreadsAPIConfig } from "threads-ts";
+
+import { env } from "@/env.mjs";
 
 const config: ThreadsAPIConfig = {
-  clientId: 'YOUR_CLIENT_ID',
-  clientSecret: 'YOUR_CLIENT_SECRET',
-  redirectUri: 'YOUR_REDIRECT_URI',
-  scope: ['threads_basic', 'threads_content_publish']
+	clientId: env.THREADS_APP_ID,
+	clientSecret: env.THREADS_APP_SECRET,
+	redirectUri: env.CALLBACK_URL,
+	scope: [
+		"threads_basic",
+		"threads_content_publish",
+		"threads_manage_replies",
+		"threads_read_replies",
+		"threads_manage_insights",
+	],
 };
 
-const threadsAPI = new ThreadsAPI(config);
+export const threads = new ThreadsAPI(config);
 ```
 
 ### Authentication
